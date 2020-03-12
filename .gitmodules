@@ -1,0 +1,18 @@
+[submodule "avr-api"]
+	path = avr-api
+	url = https://github.com/niktob560/avr-api
+[submodule "avr-log"]
+	path = avr-log
+	url = https://github.com/niktob560/avr-log
+[submodule "scheduler"]
+	path = scheduler
+	url = https://github.com/niktob560/scheduler
+[submodule "waypointmanager"]
+	path = waypointmanager
+	url = https://github.com/niktob560/waypointmanager
+[submodule "mcuterminaltranslator"]
+	path = mcuterminaltranslator
+	url = https://github.com/niktob560/mcuterminaltranslator
+[submodule "fantastic-train"]
+	path = fantastic-train
+	url = https://github.com/niktob560/fantastic-train
