@@ -16,14 +16,20 @@ Build/main.o:
 Build/core.a:
 	cd avr-api && make lib && cp Build/core.a ../Build/core.a && cd ..
 
+Build/libscheduler.a:
+	cd scheduler && mkdir -p Build && cd Build && cmake -DCMAKE_TOOLCHAIN_FILE=../cmake-avr/generic-gcc-avr.cmake .. && make scheduler && cp libscheduler-${MCU}.a ../../Build/libscheduler.a && cd ../../
+
 clean_avr-api:
 	cd avr-api && make clean && cd ..
 
-clean: clean_avr-api
+clean_scheduler:
+	cd scheduler && rm -rf Build && cd ..
+
+clean: clean_avr-api clean_scheduler
 	rm -rf Build/*
 
-link: Build/main.o Build/core.a
-	avr-gcc $(LFLAGS) Build/main.o Build/core.a -o Build/main.elf
+link: Build/main.o Build/core.a Build/libscheduler.a
+	avr-gcc $(LFLAGS) Build/main.o Build/core.a Build/libscheduler.a -o Build/main.elf
 
 objcopy: link
 	avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0  "Build/$(MAINFILENAME).elf" "Build/$(MAINFILENAME).eep"
