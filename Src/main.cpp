@@ -2,6 +2,7 @@
 #include "avr-api/Include/api.hpp"
 #include "avr-log/Include/logger.hpp"
 #include "scheduler/Include/schedule.hpp"
+#include "mcuterminaltranslator/Inc/translator.hpp"
 
 uint64_t sysTime = 0;
 

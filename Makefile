@@ -22,6 +22,9 @@ Build/libscheduler.a:
 Build/libavrlog.a:
 	cd avr-log && mkdir -p Build && cd Build && cmake -DCMAKE_TOOLCHAIN_FILE=../cmake-avr/generic-gcc-avr.cmake .. && make avr-log && cp libavr-log-${MCU}.a ../../Build/libavrlog.a && cd ../../
 
+Build/libtranslator.o:
+	cd mcuterminaltranslator && make Build/translator.o && cp Build/translator.o ../Build/libtranslator.o && cd ..
+
 clean_avr-api:
 	cd avr-api && make clean && cd ../
 
@@ -31,11 +34,14 @@ clean_scheduler:
 clean_avrlog:
 	cd avr-log/Build && make clean && cd ../../
 
-clean: clean_avr-api clean_scheduler clean_avrlog
+clean_translator:
+	cd mcuterminaltranslator && make clean && cd ..
+
+clean: clean_avr-api clean_scheduler clean_avrlog clean_translator
 	rm -rf Build/*
 
-link: Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a
-	avr-gcc $(LFLAGS) Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a -o Build/main.elf
+link: Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o
+	avr-gcc $(LFLAGS) Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o -o Build/main.elf
 
 objcopy: link
 	avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0  "Build/$(MAINFILENAME).elf" "Build/$(MAINFILENAME).eep"
