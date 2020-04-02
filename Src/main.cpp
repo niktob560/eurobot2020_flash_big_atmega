@@ -27,7 +27,7 @@ void once2();
 
 void once()
 {
-	usart::println("\t\tONCE");
+	usart::println<0>("\t\tONCE");
 	Log::debug(Log::Importance::Optional, "hello");
 	Log::info(Log::Importance::Optional, "world");
 	schedule::addOnceTask({once2, 1});
@@ -35,7 +35,7 @@ void once()
 
 void once2()
 {
-	usart::println("\t\tONCE2");
+	usart::println<0>("\t\tONCE2");
 
 	Log::dump(Log::Importance::Optional);
 
@@ -43,7 +43,7 @@ void once2()
 
 int main()
 {
-	usart::begin(115200);
+	usart::begin<0>(115200);
 	gpio::setMode(&PORTB, PB7, gpio::OUTPUT);
 	schedule::addTask({foo, 1});
 	schedule::addOnceTask({once, 1});
@@ -53,16 +53,16 @@ int main()
 	TIMER0SetA(255);
 	Log::defaultDumpFunc = [](const unsigned char* c)
 							{
-								usart::println(static_cast<int>(*c));
-								usart::println(c + 1);
+								usart::println<0>(static_cast<int>(*c));
+								usart::println<0>(c + 1);
 							};
 	sei();
 	long i = 0;
-	usart::println();
+	usart::println<0>();
 	while(1)
 	{
-		usart::print("NICE");	
-		usart::println(i);
+		usart::print<0>("NICE");	
+		usart::println<0>(i);
 		i++;
 		delay(200);
 	}
