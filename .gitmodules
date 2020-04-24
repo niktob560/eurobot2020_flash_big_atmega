@@ -13,6 +13,3 @@
 [submodule "mcuterminaltranslator"]
 	path = mcuterminaltranslator
 	url = https://github.com/niktob560/mcuterminaltranslator
-[submodule "fantastic-train"]
-	path = fantastic-train
-	url = https://github.com/niktob560/fantastic-train
