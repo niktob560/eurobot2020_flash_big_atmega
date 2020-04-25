@@ -50,7 +50,9 @@ int main()
 	schedule::addTask({foo, 1});
 	schedule::addOnceTask({once, 1});
 	interrupt::set(interrupt::TC0_COMPA, schedule::schedule);
-
+	TIMER0Init(TIMER0_COMA_NPWM_NORMAL, TIMER0_WF_CTC, TIMER0_CLK_SRC_1024);
+	TIMER0EnableCOMPAInterrupt();
+	TIMER0SetA(255);
 	Log::defaultDumpFunc = [](const unsigned char* c)
 							{
 								usart::println<0>(static_cast<int>(*c));
