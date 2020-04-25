@@ -13,6 +13,9 @@ all: size
 Build/main.o:
 	avr-g++ $(CFLAGS) "Src/main.cpp" -o "Build/main.o"
 
+Build/wheelTimers.o:
+	avr-g++ $(CFLAGS) "Src/wheelTimers.cpp" -o "Build/wheelTimers.o"
+
 Build/core.a:
 	cd avr-api && make lib && cp Build/core.a ../Build/core.a && cd ..
 
@@ -40,8 +43,8 @@ clean_translator:
 clean: clean_avr-api clean_scheduler clean_avrlog clean_translator
 	rm -rf Build/*
 
-link: Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o
-	avr-gcc $(LFLAGS) Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o -o Build/main.elf
+link: Build/main.o Build/wheelTimers.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o
+	avr-gcc $(LFLAGS) Build/wheelTimers.o Build/main.o Build/core.a Build/libscheduler.a Build/libavrlog.a Build/libtranslator.o -o Build/main.elf
 
 objcopy: link
 	avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0  "Build/$(MAINFILENAME).elf" "Build/$(MAINFILENAME).eep"

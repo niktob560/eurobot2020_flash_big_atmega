@@ -23,7 +23,7 @@ namespace wheelTimers
 		TIMER3SetC(0);
 	}
 
-	void setFreqs(uint64_t w0, uint64_t w1, uint64_t w2)
+	void setTicks(uint16_t w0, uint16_t w1, uint16_t w2)
 	{
 		TIMER3SetA(w0);
 		TIMER3SetB(w1);

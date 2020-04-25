@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "api.hpp"
+#include "avr-api/Include/api.hpp"
 
 namespace wheelTimers
 {
@@ -10,5 +10,5 @@ namespace wheelTimers
 
 	void init();
 	void stop();
-	void setFreqs(uint64_t w0, uint64_t w1, uint64_t w2);
+	void setTicks(uint16_t w0, uint16_t w1, uint16_t w2);
 } // namespace wheelTimers

@@ -3,6 +3,7 @@
 #include "avr-log/Include/logger.hpp"
 #include "scheduler/Include/schedule.hpp"
 #include "mcuterminaltranslator/Inc/translator.hpp"
+#include "Include/wheelTimers.hpp"
 
 uint64_t sysTime = 0;
 
@@ -43,6 +44,7 @@ void once2()
 
 int main()
 {
+	wheelTimers::init();
 	usart::begin<0>(115200);
 	gpio::setMode(&PORTB, PB7, gpio::OUTPUT);
 	schedule::addTask({foo, 1});
