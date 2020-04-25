@@ -61,6 +61,7 @@ int main()
 	sei();
 	long i = 0;
 	usart::println<0>();
+	wheelTimers::setDelays(100, 100, 100);
 	while(1)
 	{
 		usart::print<0>("NICE");	

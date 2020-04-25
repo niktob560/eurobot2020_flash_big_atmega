@@ -10,5 +10,5 @@ namespace wheelTimers
 
 	void init();
 	void stop();
-	void setTicks(uint16_t w0, uint16_t w1, uint16_t w2);
+	void setDelays(uint16_t w0, uint16_t w1, uint16_t w2);
 } // namespace wheelTimers
