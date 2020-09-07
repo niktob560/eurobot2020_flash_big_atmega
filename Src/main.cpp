@@ -58,6 +58,7 @@ int main()
 								usart::println<0>(static_cast<int>(*c));
 								usart::println<0>(c + 1);
 							};
+								
 	sei();
 	long i = 0;
 	usart::println<0>();
